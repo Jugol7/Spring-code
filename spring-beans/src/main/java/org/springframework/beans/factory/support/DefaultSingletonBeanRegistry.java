@@ -192,6 +192,7 @@ public class DefaultSingletonBeanRegistry extends SimpleAliasRegistry implements
 							ObjectFactory<?> singletonFactory = this.singletonFactories.get(beanName);
 							if (singletonFactory != null) {
 								singletonObject = singletonFactory.getObject();
+								// 提前曝光，加入的是没有属性填充的bean放入缓存中
 								this.earlySingletonObjects.put(beanName, singletonObject);
 								this.singletonFactories.remove(beanName);
 							}
@@ -257,6 +258,7 @@ public class DefaultSingletonBeanRegistry extends SimpleAliasRegistry implements
 					afterSingletonCreation(beanName);
 				}
 				if (newSingleton) {
+					// 三级缓存之3 加入单例池中，移除缓存
 					addSingleton(beanName, singletonObject);
 				}
 			}

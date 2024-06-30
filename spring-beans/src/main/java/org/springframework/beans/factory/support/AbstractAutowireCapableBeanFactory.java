@@ -588,7 +588,7 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
 				logger.trace("Eagerly caching bean '" + beanName +
 						"' to allow for resolving potential circular references");
 			}
-			// 循环依赖添加到三级缓存
+			// 三级缓存之2、循环依赖 添加到三级缓存 （Aop 代理对象）
 			addSingletonFactory(beanName, () -> getEarlyBeanReference(beanName, mbd, bean));
 		}
 
